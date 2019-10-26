@@ -1,5 +1,5 @@
 /*
-地上有一个 m 行和 n 列的方格，横纵坐标范围分别是 0?m?1 和 0?n?1。
+地上有一个 m 行和 n 列的方格，横纵坐标范围分别是 0~m-1 和 0~n-1。
 
 一个机器人从坐标0,0的格子开始移动，每一次只能向左，右，上，下四个方向移动一格。
 
@@ -39,11 +39,57 @@
 每个节点最多只会入队一次，所以时间复杂度不会超过方格中的节点个数。
 最坏情况下会遍历方格中的所有点，所以时间复杂度就是 O(nm)。
 */
+#include <map>
+#include <vector>
+#include <queue>
+using namespace std;
 
 class Solution
 {
 public:
+    int getSingleSum(int x)
+    {
+        int s = 0;
+        while (x)
+            s += x % 10, x /= 10;
+        return s;
+    }
+    int getSum(pair<int, int> p)
+    {
+        //用于计算位数
+        return getSingleSum(p.first) + getSingleSum(p.second);
+    }
     int movingCount(int threshold, int rows, int cols)
     {
+        int res = 0; //统计结果
+        if (!rows || !cols)
+            return 0;
+
+        vector<vector<bool>> st(rows, vector<bool>(cols));
+        queue<pair<int, int>> q;
+
+        int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, 1, 0, -1};
+
+        q.push({0, 0});
+        while (q.size())
+        {
+            auto t = q.front();
+            q.pop();
+
+            if (getSum(t) > threshold || st[t.first][t.second])
+                continue; //已经遍历过了，遍历下一个结点
+            res++;
+            st[t.first][t.second] = true;
+
+            for (int i = 0; i < 4; i++)
+            {
+                int x = t.first + dx[i], y = t.second + dy[i];
+                if (x >= 0 && x < rows && y >= 0 && y < cols)
+                {
+                    q.push({x, y});
+                }
+            }
+        }
+        return res;
     }
 };

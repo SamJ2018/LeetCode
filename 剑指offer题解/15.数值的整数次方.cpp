@@ -71,3 +71,24 @@ class Solution(object):
             res = 1.0/res
         return res
 */
+
+class Solution
+{
+public:
+    double power(double base, int e)
+    {
+        int res = 1, f = 0;
+        if (e < 0)
+            f = 1, e *= -1;
+        while (e)
+        {
+            if (e & 1)
+                res = res * base;
+            base *= base;
+            e >>= 1;
+        }
+        if (f)
+            return 1.0 / res;
+        return res;
+    }
+};

@@ -19,19 +19,29 @@
 假设 N=n1+n2+…+nk，并且 n1×n2×…×nk是最大乘积。
 
 显然1不会出现在其中；
-如果对于某个 i 有 ni≥5，那么把 ni 拆分成 3+(ni?3)，我们有 3(ni?3)=3ni?9>ni；
+如果对于某个 i 有 ni≥5，那么把 ni 拆分成 3+(ni-3)，我们有 3(ni-3)=3ni-9>ni；
 如果 ni=4，拆成 2+2乘积不变，所以不妨假设没有4；
 如果有三个以上的2，那么 3×3>2×2×2，所以替换成3乘积更大；
 综上，选用尽量多的3，直到剩下2或者4时，用2。
 
-时间复杂度分析：当 n比较大时，n 会被拆分成 ?n/3?个数，我们需要计算这么多次减法和乘法，所以时间复杂度是 O(n)。
+时间复杂度分析：当 n比较大时，n 会被拆分成 n/3 个数，我们需要计算这么多次减法和乘法，所以时间复杂度是 O(n)。
 
 */
 
 class Solution
 {
 public:
-    int maxProductAfterCutting(int length)
+    int maxProductAfterCutting(int n)
     {
+        if (n <= 3)
+            return 1 * (n - 1);
+        int res = 1;
+        if (n % 3 == 1)
+            res *= 4, n -= 4;
+        if (n % 3 == 2)
+            res *= 2, n -= 2;
+        while (n)
+            res *= 3, n -= 3;
+        return res;
     }
 };

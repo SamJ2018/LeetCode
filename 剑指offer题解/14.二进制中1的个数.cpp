@@ -31,7 +31,12 @@
 class Solution
 {
 public:
-    int NumberOf1(int n)
+    int NumberOf1(int _n)
     {
+        unsigned int n = _n; //ÎªÁË·ÀÖ¹ËÀÑ­»·£¬ÓĞ·ûºÅÊı²¹1 ÎŞ·ûºÅÊı²¹0
+        int s = 0;
+        while (n)
+            s += n & 1, n >>= 1;
+        return s;
     }
 };
