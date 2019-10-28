@@ -23,10 +23,12 @@ Explanation: There are three ways to climb to the top.
 */
 #include "util.h"
 
-class Solution {
-public
+class Solution
+{
+public:
 	//1、暴力搜索，回溯法  会超时
-	int climbStairs(int n) {
+	int climbStairs(int n)
+	{
 		if (n == 1 || n == 2)
 			return n;
 
