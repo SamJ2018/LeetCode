@@ -23,6 +23,30 @@ Devops
     -   记录文件的所有历史变化，可以代码回滚
     -   多人协作
 
+#### git基本命令
+    -   git status 查看当前仓库状态
+    -   git add <file> 添加文件到暂存区
+    -   git add . /  git add * 添加当前所有文件到暂存区
+    -   git rm --cached 撤出暂存区
+    -   git rm -f 同上，同时删除工作目录和暂存区的文件
+    -   git commit -m 从缓存区提交到本地仓库
+
+    -   git mv old-filename new-filename 不会出现delete而是rename信息
+    -   git diff 默认比对工作区和暂存区
+        -   git diff --cached 比对暂存区和本地仓库
+
+    -   git log -p 详细信息
+        -   git log -p -1 只显示一条信息
+    
+
+    -   回到原来的快照信息
+        -   git reset --hard (hash值)
+        -   git relog  查看所有历史操作
+
+
+### tree .git   查看本地仓库文件
+    -   objects 本地仓库   可以通过本地仓库回到快照
+    -   index  暂存区   
 
 
 
