@@ -13,17 +13,32 @@
 输出："ggg#ll"
 
 解释：每当字符流读入一个字符，就进行一次判断并输出当前的第一个只出现一次的字符。
-*/
+---------------------------
+双指针or单调队列
 
+*/
+#include <unordered_map>
+#include <queue>
+using namespace std;
 class Solution
 {
 public:
+    unordered_map<char, int> count;
+    queue<int> q;
     //Insert one char from stringstream
     void insert(char ch)
     {
+        if (++count[ch] > 1)
+            while (q.size() && count[q.front()] > 1)
+                q.pop();
+        else
+            q.push(ch);
     }
     //return the first appearence once char in current stringstream
     char firstAppearingOnce()
     {
+        if (q.empty())
+            return '#';
+        return q.front();
     }
 };

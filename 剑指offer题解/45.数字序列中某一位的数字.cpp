@@ -9,11 +9,30 @@
 输入：13
 
 输出：1
+
+------------------------------
+如有一个数n
+1、确定是第几位数    n-10-90*2-900*3-...-9..0*i  减到不能减位置，就能确定是第i位数
+2、确定几位数的第几个数 如上求得的是4位数的第256个数： 1000+256-1=1255
+3、属于那个数的第几位？  
 */
 class Solution
 {
 public:
     int digitAtIndex(int n)
     {
+        long long i = 1, s = 9, base = 1;
+        while (n > i * s)
+        {
+            n -= i * s; //n一直减到不能减，确定有i位数   n为剩余的i+1位的分组  n/(i+1) 的上取整为 i+1位的第几个数
+            i++;
+            s *= 10;
+            base *= 10;
+        }
+        int number = base + (n + i - 1) / i - 1; // (n+i-1)/i  为n/i的上取整
+        int r = n % i ? n % i : i;
+        for (int j = 0; j < i - r; j++)
+            number /= 10;
+        return number % 10;
     }
 };

@@ -48,5 +48,6 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "queue": "cpp"
-    }
+    },
+    "aiXcoder.enableTelemetry": false
 }

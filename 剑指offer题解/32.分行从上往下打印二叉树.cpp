@@ -26,6 +26,8 @@
 树中每个节点仅会进队出队一次，所以时间复杂度是 O(n)。
 */
 #include <vector>
+#include <queue>
+
 using namespace std;
 struct TreeNode
 {
@@ -41,23 +43,30 @@ public:
     vector<vector<int>> printFromTopToBottom(TreeNode *root)
     {
         vector<vector<int>> res;
-        if(!root) return res;
-        queue<TreeNode* >q;
-        q.push(root);q.push(nullptr);
+        if (!root)
+            return res;
+        queue<TreeNode *> q;
+        q.push(root);
+        q.push(nullptr);
         vector<int> level;
-        while(q.size()){
-            auto t=q.front();
+        while (q.size())
+        {
+            auto t = q.front();
             q.pop();
-            if(!t){
-                if(level.empty()) break;
+            if (!t)
+            {
+                if (level.empty())
+                    break;
                 res.push_back(level);
                 level.clear();
                 q.push(nullptr);
                 continue;
             }
             level.push_back(t->val);
-            if(t->left) q.push(t->left);
-            if(t->right) q.push(t->right);
+            if (t->left)
+                q.push(t->left);
+            if (t->right)
+                q.push(t->right);
         }
         return res;
     }
