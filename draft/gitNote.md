@@ -51,6 +51,11 @@ Devops
 
 
 
+- 命令总结
+*	设置颜色
+	* git config --global color.ui true
+*	回退上一个版本
+	git reset --hard  version_num
 
 
 
